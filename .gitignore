@@ -1,3 +1,11 @@
 
 .idea/
 *.iml
+*/target
+
+frontend/photo-app/node_modules
+frontend/photo-app/dist
+frontend/photo-app/tmp
+# e2e
+frontend/photo-app/e2e/*.js
+frontend/photo-app/e2e/*.map
