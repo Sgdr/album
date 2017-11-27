@@ -3,7 +3,6 @@ package album.db;
 import album.entities.Photo;
 import album.entities.PhotoInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
@@ -46,11 +45,7 @@ public class PhotoDao {
             return params;
         }).toArray(size -> (Map<String, Object>[]) new HashMap[size]);
         SqlParameterSource[] sqlParameterSources = SqlParameterSourceUtils.createBatch(paramList);
-        try {
-            getTemplate().batchUpdate(INSERT_QUERY, sqlParameterSources);
-        } catch (DataAccessException ex) {
-            ex.printStackTrace();
-        }
+        getTemplate().batchUpdate(INSERT_QUERY, sqlParameterSources);
     }
 
     /** query to select photos information list */
@@ -86,7 +81,7 @@ public class PhotoDao {
     /**
      * @return named template
      */
-    public NamedParameterJdbcTemplate getTemplate() {
+    private NamedParameterJdbcTemplate getTemplate() {
         return new NamedParameterJdbcTemplate(this.dataSource);
     }
 }

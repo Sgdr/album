@@ -4,6 +4,7 @@ import album.db.PhotoDao;
 import album.entities.Photo;
 import album.entities.PhotoInfo;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,17 +22,15 @@ import java.util.stream.Stream;
 @RestController
 public class PhotoController {
 
-    private PhotoDao photoDao;
+    private static final Logger log = LoggerFactory.getLogger("album");
 
-    private Logger log;
+    private final PhotoDao photoDao;
 
-    public PhotoController(PhotoDao photoDao, Logger log) {
+    public PhotoController(PhotoDao photoDao) {
         this.photoDao = photoDao;
-        this.log = log;
     }
 
     /**
-     * returns list of photos descriptions
      * @return list of photos descriptions
      */
     @RequestMapping(value = "/photos", method = RequestMethod.GET)

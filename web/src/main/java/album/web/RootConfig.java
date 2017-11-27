@@ -19,8 +19,4 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
         })
 public class RootConfig {
 
-    @Bean
-    public Logger getLogger() {
-        return LoggerFactory.getLogger("album");
-    }
 }
