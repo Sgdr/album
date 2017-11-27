@@ -1,30 +1,32 @@
 package album.entities;
 
 /**
- * Information about photo
  * @author sgdr
  */
 public class Photo {
 
-    private String imageName;
+    private PhotoInfo info;
 
-    private String description;
+    private byte[] image;
 
-    public String getImageName() {
-        return imageName;
+    public Photo(PhotoInfo info, byte[] image) {
+        this.info = info;
+        this.image = image;
     }
 
-    public Photo setImageName(String imageName) {
-        this.imageName = imageName;
-        return this;
+    public PhotoInfo getInfo() {
+        return info;
     }
 
-    public String getDescription() {
-        return description;
+    public void setInfo(PhotoInfo info) {
+        this.info = info;
     }
 
-    public Photo setDescription(String description) {
-        this.description = description;
-        return this;
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }
