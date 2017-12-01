@@ -1,1 +1,5 @@
 <a routerLink="/photos/edit">Edit photos</a>
+<div *ngFor="let photo of photoList">
+    <img src="{{photoUrl}}/{{photo.imageName}}" width="100px">
+    {{photo.description}}
+</div>

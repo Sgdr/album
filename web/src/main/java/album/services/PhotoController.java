@@ -46,18 +46,22 @@ public class PhotoController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public void savePhotos(@RequestPart("descriptions") PhotoInfo[] photoInfos,
                            @RequestParam("photosUpload") MultipartFile[] files) {
+        String imageNames = Stream.of(photoInfos).map(PhotoInfo::getImageName).collect(Collectors.joining(", "));
+        log.info("Begin of saving photos: " + imageNames);
         List<Photo> photoList = Stream.of(files).map(file -> {
             String name = file.getOriginalFilename();
             PhotoInfo photoInfo = Stream.of(photoInfos).filter(info ->
                     name.equals(info.getImageName()))
-                    .findFirst().orElseThrow(IllegalArgumentException::new);
+                    .findFirst().orElse(new PhotoInfo(name, null));
             try {
                 return new Photo(photoInfo, file.getBytes());
             } catch (IOException e) {
+                log.error("Can't get bytes for photo " + name, e);
                 throw new IllegalArgumentException(e);
             }
         }).collect(Collectors.toList());
         photoDao.savePhotos(photoList);
+        log.info("End of saving photos: " + imageNames);
     }
 
     /**

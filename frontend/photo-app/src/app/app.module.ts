@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {RouterModule, Routes} from "@angular/router";
 import {ViewModule} from "./view/view.module";
 import {EditModule} from "./edit/edit.module";
+import {PhotosService} from "./services/photos.service";
 
 const route: Routes = [
     {
@@ -39,7 +40,7 @@ const route: Routes = [
         EditModule,
         RouterModule.forRoot(route)
     ],
-    providers: [],
+    providers: [PhotosService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
